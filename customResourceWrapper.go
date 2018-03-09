@@ -14,15 +14,9 @@ import (
 	"net/http"
 )
 
-type ResourceProperties interface {
-	Validate() error
-	Create() (string, error)
-	Update() (string, error)
-	Delete() error
-	GetInstance() interface{}
-}
 
-func Execute(evt *cloudformationevt.Event, properties ResourceProperties) (interface{}, error) {
+
+func Execute(evt *cloudformationevt.Event, properties model.ResourceProperties) (interface{}, error) {
 
 	log.Printf("INPUT %v", evt)
 	properties, err := unmarshal(evt, properties)
@@ -54,10 +48,10 @@ func Execute(evt *cloudformationevt.Event, properties ResourceProperties) (inter
 	}
 }
 
-func unmarshal(evt *cloudformationevt.Event, properties ResourceProperties) (ResourceProperties, error) {
+func unmarshal(evt *cloudformationevt.Event, properties model.ResourceProperties) (model.ResourceProperties, error) {
 	instance := properties.GetInstance()
 	err := json.Unmarshal(evt.ResourceProperties, &instance)
-	properties = instance.(ResourceProperties)
+	properties = instance.(model.ResourceProperties)
 	log.Printf("resource properties: %v", awsutil.Prettify(properties))
 	return properties, err
 }

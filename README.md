@@ -14,7 +14,7 @@ MyCustomResource:
 ```
 
 ### Handler implementation
-Pass struct that implements ResourceProperties interface as a second parameter
+Pass struct that implements model.ResourceProperties interface as a second parameter
 ```
 func Handle(evt *cloudformationevt.Event, runtimeCtx *runtime.Context) (interface{}, error) {
 	return customresource.Execute(evt, MyResourceProperties{})
