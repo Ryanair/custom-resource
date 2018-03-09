@@ -14,8 +14,6 @@ import (
 	"net/http"
 )
 
-
-
 func Execute(evt *cloudformationevt.Event, properties model.ResourceProperties) (interface{}, error) {
 
 	log.Printf("INPUT %v", evt)
