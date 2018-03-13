@@ -37,7 +37,7 @@ Validate required fields and other data if necessary
 
 ```
 func (data MyResourceProperties) Validate() error {
-	if r.Property1 == "" {
+	if data.Property1 == "" {
 		return errors.New("Property1 must be set")
 	}
 	return nil
@@ -72,7 +72,7 @@ func (data MyResourceProperties) Update() (string, error) {
 * If error is not nil it will return as FAILED, otherwise SUCCESS
 ```
 func (data MyResourceProperties) Delete() error {
-
+  //delete logic
 	return nil
 }
 ```
@@ -82,4 +82,5 @@ Helper method to allow json unmarshalling
 ```
 func (data MyResourceProperties) GetInstance() interface{} {
 	return &MyResourceProperties{}
-}```
+}
+```
